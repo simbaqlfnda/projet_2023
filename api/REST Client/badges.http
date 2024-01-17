@@ -1,0 +1,67 @@
+@baseUrl = http://localhost:3000
+
+### Read all badges 
+GET {{baseUrl}}/badges
+
+### Read all badges with user-id  107
+GET {{baseUrl}}/badges/?user-id=107
+
+### Read all badges of a user which does not exist
+GET {{baseUrl}}/badges/?user-id=10700
+
+### Add a badge to a user who has not yet earned it
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+    "label": "Médaille d'or",
+    "id": 106
+    }
+
+### Read all badges with user-id  107
+GET {{baseUrl}}/badges/?user-id=106
+
+### Try to add a badge to a user who has earned it
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+    "label": "Médaille d'or",
+    "id": 106
+    }
+    
+### Try to add a badge to a user with a wrong label
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+    "label": "Médaille de br",
+    "id": 107
+    }
+
+### Try to add a badge to a user with a wrong id
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+    "label": "Médaille de bronze",
+    "id": 10
+    }
+
+### Try to a badge to a user when missing one param
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+    "label": "Médaille de br",
+    }
+
+### Try to a badge to a user when missing one param
+POST {{baseUrl}}/badges
+Content-Type: application/json
+
+    {
+     "id": 107
+    }
+
+

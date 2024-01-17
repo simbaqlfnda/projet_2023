@@ -1,0 +1,98 @@
+@baseUrl = http://localhost:3000
+
+### List of all users
+GET {{baseUrl}}/users
+
+#### First login as the user
+# @name user
+
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+    "username":"quizwiz",
+    "password":"quizwiz"
+}
+
+
+#### Get details of the connected User
+GET {{baseUrl}}/users/details
+Content-Type: application/json
+Authorization: {{user.response.body.token}}
+
+
+### Register a new user
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "username":"vinciweb2group10",
+    "password":"vinciweb2group10"
+}
+
+### Update the user score
+PATCH {{baseUrl}}/users
+Content-Type: application/json
+Authorization: {{user.response.body.token}}
+
+{
+    "score":145
+}
+
+
+######### ERROR OPERATION  ###########
+
+
+### Register a user with empty username and password
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "username":"",
+    "password":""
+}
+
+### Register a user with a username but no password
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "username":"jean",
+    "password":""
+}
+
+### Register a user with an existing username
+POST {{baseUrl}}/users/register
+Content-Type: application/json
+
+{
+    "username":"quizwiz",
+    "password":"quizwiz"
+}
+
+
+### Login a user with a password but no username
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+    "username":"",
+    "password":"jean"
+}
+
+
+#### Get user details without a connected user
+GET {{baseUrl}}/users/details
+Content-Type: application/json
+
+
+### Update score without a connected user
+PATCH {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "score":145
+}
+
+
+
